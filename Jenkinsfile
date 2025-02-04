@@ -1,4 +1,7 @@
 pipeline {
+
+    
+    
     agent any
     stages {
         stage('Checkout') {
@@ -13,14 +16,21 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-                    sh 'docker build  -f ./Dockerfile -t project_03:latest .'
+                    sh 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
                 }
             }
         }
 
 
 
+          }
+      }
 
+      stage('Cleaning up') { 
+		  steps { 
+              sh 'docker rmi  roundlifemin/project03:latest' // docker image 제거
+          }
+      } 
 
 
     }
