@@ -24,11 +24,6 @@ pipeline {
 
 
 
-      stage('Cleaning up') { 
-		  steps { 
-              sh 'docker rmi  roundlifemin/project03:latest' // docker image 제거
-          }
-      } 
 
 
     }
