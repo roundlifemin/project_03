@@ -28,7 +28,7 @@ pipeline {
 
 
                     
-                      docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
+                   sh  'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
 		       
                     
              }
