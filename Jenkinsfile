@@ -1,13 +1,13 @@
 pipeline {
     agent any
 
-   environment{
+   // environment{
            //def dockerUsername = 'your_dockerhub_username' // Docker Hub 사용자 이름
            //def dockerToken = 'your_access_token' // 생성한 액세스 토큰
 
 	   //dockerUsername = 'roundlifemin'
 	   //dockerToken = 'dockerhub_access_key'
-   }
+   //}
 
 
     stages {
