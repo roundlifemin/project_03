@@ -28,7 +28,7 @@ pipeline {
 
 
                     
-                   sh  'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+                   bat  'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
 		       
                     
              }
