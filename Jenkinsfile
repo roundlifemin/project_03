@@ -7,6 +7,7 @@ pipeline {
 
 	   dockerUsername = 'roundlifemin'
 	   dockerToken = 'dockerhub_access_key'
+	   'dockerhub_access_key
    }
 
 
@@ -39,7 +40,7 @@ pipeline {
                       // Docker Hub에 로그인
                       // bat  'echo minyoung1234!@#$ | docker login -u roundlifemin --password-stdin'
 
-		      withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_TOKEN')]) {
+		      withCredentials([usernamePassword(credentialsId: 'dockerhub_access_key', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_TOKEN')]) {
                         bat "echo ${DOCKER_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin"
                     }
 
