@@ -30,8 +30,10 @@ pipeline {
        stage('Push') {
             steps {
                 script {
-                      // Docker 이미지 푸시
-                   
+                      // Docker Hub에 로그인
+                       bat sh 'echo minyoung1234!@#$ | docker login -u roundlifemin --password-stdin'
+
+		        // Docker 이미지 푸시
                        bat 'docker push roundlifemin/project_03:latest'
                   
                 }
