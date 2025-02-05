@@ -15,11 +15,11 @@ pipeline {
                 script {
                     // Docker 이미지 빌드
 		    
-                     // bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+                      bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
 
-		     sh ...
-                        docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
-		       ...
+		     
+                     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
+		    
 		    
 		       
                 }
@@ -31,9 +31,9 @@ pipeline {
             steps {
                 script {
                       // Docker 이미지 푸시
-                   sh ...
-                         docker push roundlifemin/project_03:latest
-                      ...
+                   
+                       bat 'docker push roundlifemin/project_03:latest'
+                  
                 }
             }
         }
