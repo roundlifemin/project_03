@@ -32,7 +32,7 @@ pipeline {
                 script {
                       // Docker 이미지 푸시
                    sh ...
-                       sh  docker push roundlifemin/project_03:latest
+                         docker push roundlifemin/project_03:latest
                       ...
                 }
             }
