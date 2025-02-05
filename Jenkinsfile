@@ -1,12 +1,10 @@
 pipeline {
-
-    
-    
     agent any
     stages {
         stage('Checkout') {
             steps {
-                git 'https://github.com/roundlifemin/project_03.git'
+              //  git 'https://github.com/roundlifemin/project_03.git'
+	        checkout scm
             }
        }
 
@@ -16,9 +14,9 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-		    sh ...
-                      docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
-		       ...
+		    
+                     bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+		       
                 }
             }
         }
