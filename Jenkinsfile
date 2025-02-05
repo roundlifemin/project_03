@@ -26,9 +26,11 @@ pipeline {
                     // Docker 이미지 빌드
 		     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
 
+                    sh ...
                       docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
 		       
-                }
+                       ...
+             }
             }
         }
 
