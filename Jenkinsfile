@@ -16,7 +16,9 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-                    bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+		    sh ...
+                      docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
+		       ...
                 }
             }
         }
