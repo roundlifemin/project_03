@@ -1,5 +1,15 @@
 pipeline {
     agent any
+
+   environment{
+           //def dockerUsername = 'your_dockerhub_username' // Docker Hub 사용자 이름
+           //def dockerToken = 'your_access_token' // 생성한 액세스 토큰
+
+	   dockerUsername = 'roundlifemin'
+	   dockerToken = 'dockerhub_access_key'
+   }
+
+
     stages {
         stage('Checkout') {
             steps {
@@ -14,13 +24,9 @@ pipeline {
             steps {
                 script {
                     // Docker 이미지 빌드
-		    
-                      bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+		     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
 
-		     
-                     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
-		    
-		    
+                      bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
 		       
                 }
             }
@@ -31,7 +37,11 @@ pipeline {
             steps {
                 script {
                       // Docker Hub에 로그인
-                       bat  'echo minyoung1234!@#$ | docker login -u roundlifemin --password-stdin'
+                      // bat  'echo minyoung1234!@#$ | docker login -u roundlifemin --password-stdin'
+
+		      withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_TOKEN')]) {
+                        bat "echo ${DOCKER_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin"
+                    }
 
 		        // Docker 이미지 푸시
                        bat 'docker push roundlifemin/project_03:latest'
