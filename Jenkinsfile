@@ -26,7 +26,7 @@ pipeline {
                     // Docker 이미지 빌드
 		     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
 
-                      bat 'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
+                      docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
 		       
                 }
             }
