@@ -58,6 +58,8 @@ pipeline {
       stage('Deploy to Kubernetes') {
             steps {
                 script {
+		    bat 'cp deploy-nginx.yaml .
+		    bat 'cp service-nginx.yaml .
                     bat 'kubectl apply -f deploy-nginx.yaml'
                     bat 'kubectl apply -f service-nginx.yaml'
                 }
