@@ -55,6 +55,24 @@ pipeline {
 
 
 
+      stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    bat 'kubectl apply -f deploy-nginx.yaml'
+                    bat 'kubectl apply -f service-nginx.yaml'
+                }
+            }
+        }
+
+       stage('Finish') {
+            steps{
+                bat 'echo Build and deploy complete.'
+                bat 'docker images -qf dangling=true | xargs -I{} docker rmi {}'
+            }
+        }
+
+
+
     }
 }
 
