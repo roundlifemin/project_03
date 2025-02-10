@@ -62,17 +62,17 @@ pipeline {
 
       stage('Deploy to Kubernetes') {
             steps {
-                script {
-		       withCredentials([usernamePassword(credentialsId: 'kubernetes_access_key', usernameVariable: 'KUBE_USER', passwordVariable: 'KUBE_PASSWORD')]) {
+               // script {
+	//	       withCredentials([usernamePassword(credentialsId: 'kubernetes_access_key', usernameVariable: 'KUBE_USER', passwordVariable: 'KUBE_PASSWORD')]) {
                   
- 		    bat 'kubectl config set-credentials ${KUBE_USER} --token=${KUBE_PASSWORD}'
-                    }	    
+ 	//	    bat 'kubectl config set-credentials ${KUBE_USER} --token=${KUBE_PASSWORD}'
+          //          }	    
 
 		  //  bat 'scp -P 105 deploy-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu'
 		  //  bat 'scp -P 105 service-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu'
 
-                    bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
-                    bat 'kubectl apply -f /home/ubuntu/service-nginx.yaml'
+                    bat 'kubectl apply -f ubuntu@127.0.0.1:/home/ubuntu/deploy-nginx.yaml'
+                    bat 'kubectl apply -f ubuntu@127.0.0.1:/home/ubuntu/service-nginx.yaml'
 		    }
                 }
             
