@@ -1,9 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        KUBECONFIG = '$HOME/.kube/config' // kubeconfig 파일의 경로
-    }
 
    // environment{
            //def dockerUsername = 'your_dockerhub_username' // Docker Hub 사용자 이름
@@ -59,14 +56,20 @@ pipeline {
 
 
 
+
+
+      
+
       stage('Deploy to Kubernetes') {
             steps {
                 script {
 		       withCredentials([usernamePassword(credentialsId: 'kubernetes_access_key', usernameVariable: 'KUBE_USER', passwordVariable: 'KUBE_PASSWORD')]) {
-                   
+                    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml ubuntu@10.0.0.105:/home/ubuntu'
+		    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml ubuntu@10.0.0.105:/home/ubuntu'
+
 		    bat 'kubectl config set-credentials $KUBE_USER --token=$KUBE_PASSWORD'
-                    bat 'kubectl apply -f deploy-nginx.yaml'
-                    bat 'kubectl apply -f service-nginx.yaml'
+                    bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
+                    bat 'kubectl apply -f /home/ubuntu/service-nginx.yaml'
 		    }
                 }
             }
