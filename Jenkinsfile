@@ -1,6 +1,10 @@
 pipeline {
     agent any
 
+    environment {
+        KUBECONFIG = '$HOME/.kube/config' // kubeconfig 파일의 경로
+    }
+
    // environment{
            //def dockerUsername = 'your_dockerhub_username' // Docker Hub 사용자 이름
            //def dockerToken = 'your_access_token' // 생성한 액세스 토큰
