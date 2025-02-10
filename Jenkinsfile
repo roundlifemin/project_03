@@ -65,12 +65,9 @@ stage("deploy application on kubernetes cluster") {
                     serverUrl: "https://kubernetes.default",
                     namespace: "default"
                 ]) {
-                    sh '''
-                    kubectl apply -f deploy-nginx.yaml
-                    kubectl apply -f service-nginx.yaml
-                    '''
+                   bat 'kubectl apply -f deploy-nginx.yaml'
+                   bat 'kubectl apply -f service-nginx.yaml'
                 }
-            }
         }
     }
 
