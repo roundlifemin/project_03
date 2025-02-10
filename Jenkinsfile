@@ -69,7 +69,7 @@ pipeline {
                     }	    
 
 		    bat 'scp deploy-nginx.yaml ubuntu@10.100.0.105:/home/ubuntu'
-		    bat 'scp -P 105 service-nginx.yaml ubuntu@10.100.0.105:/home/ubuntu'
+		    bat 'scp service-nginx.yaml ubuntu@10.100.0.105:/home/ubuntu'
 
                     bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
                     bat 'kubectl apply -f /home/ubuntu/service-nginx.yaml'
