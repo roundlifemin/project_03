@@ -64,10 +64,12 @@ pipeline {
             steps {
                 script {
 		       withCredentials([usernamePassword(credentialsId: 'kubernetes_access_key', usernameVariable: 'KUBE_USER', passwordVariable: 'KUBE_PASSWORD')]) {
-                    bat 'scp deploy-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu -p 105'
+                  
+ 		    bat 'kubectl config set-credentials $KUBE_USER --token=$KUBE_PASSWORD'
+         	    
+		    bat 'scp deploy-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu -p 105'
 		    bat 'scp service-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu -P 105'
 
-		    bat 'kubectl config set-credentials $KUBE_USER --token=$KUBE_PASSWORD'
                     bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
                     bat 'kubectl apply -f /home/ubuntu/service-nginx.yaml'
 		    }
