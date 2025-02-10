@@ -62,7 +62,7 @@ stage("deploy application on kubernetes cluster") {
             steps {
                 withKubeConfig([
                     credentialsId: "kubernetes_access_key",
-                    serverUrl: "https://kubernetes.default",
+                    serverUrl: "https://10.100.0.105:6443",
                     namespace: "default"
                 ]) {
                    bat 'kubectl apply -f deploy-nginx.yaml'
