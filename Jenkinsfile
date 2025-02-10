@@ -68,8 +68,8 @@ pipeline {
  		    bat 'kubectl config set-credentials ${KUBE_USER} --token=${KUBE_PASSWORD}'
                     }	    
 
-		    bat 'scp deploy-nginx.yaml ubuntu@10.100.0.105:/home/ubuntu'
-		    bat 'scp service-nginx.yaml ubuntu@10.100.0.105:/home/ubuntu'
+		    bat 'scp -P 105 deploy-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu'
+		    bat 'scp -P 105 service-nginx.yaml ubuntu@127.0.0.1:/home/ubuntu'
 
                     bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
                     bat 'kubectl apply -f /home/ubuntu/service-nginx.yaml'
