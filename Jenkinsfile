@@ -64,8 +64,8 @@ pipeline {
             steps {
                 script {
 		       withCredentials([usernamePassword(credentialsId: 'kubernetes_access_key', usernameVariable: 'KUBE_USER', passwordVariable: 'KUBE_PASSWORD')]) {
-                    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml ubuntu@10.0.0.105:/home/ubuntu'
-		    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml ubuntu@10.0.0.105:/home/ubuntu'
+                    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml ubuntu@127.0.0.105:/home/ubuntu'
+		    bat 'scp C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml ubuntu@127.0.0.105:/home/ubuntu'
 
 		    bat 'kubectl config set-credentials $KUBE_USER --token=$KUBE_PASSWORD'
                     bat 'kubectl apply -f /home/ubuntu/deploy-nginx.yaml'
