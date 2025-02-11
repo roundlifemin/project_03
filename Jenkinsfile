@@ -61,9 +61,8 @@ pipeline {
 stage("deploy application on kubernetes cluster") {
             steps {
                 withKubeConfig([
-                    credentialsId: "kubernetes_config",
-                    serverUrl: "https://10.100.0.105:6443",
-                    namespace: "default"
+                    credentialsId: "config",
+                    serverUrl: "https://10.100.0.105:6443"
                 ]) {
                    bat 'kubectl apply -f deploy-nginx.yaml'
                    bat 'kubectl apply -f service-nginx.yaml'
