@@ -60,15 +60,11 @@ stage("SSH Into k8s Server") {
 	
         steps('Put myapp-deployment.yml') {
             sshPut remote: remote, from: 'deploy-nginx.yml', into: '.'
-              }
-    
 
-     steps('Put myapp-deployment.yml') {
             sshPut remote: remote, from: 'service-nginx.yml', into: '.'
-              }
 
+  } 
 }
-
 
     stage("Deploy to Kubernetes (k8s-master)") {
     steps {
