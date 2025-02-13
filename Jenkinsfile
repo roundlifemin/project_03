@@ -49,18 +49,19 @@ pipeline {
 
 
 
-stage("SSH Into k8s Server") {
-	
-        steps('Put myapp-deployment.yml') {
+      stage("SSH Into k8s Server") {
+ 	
+           steps('Put myapp-deployment.yml') {
 
-	   script {
-
-                def remote = [
-                        host: '127.0.0.10',
-			port: 22,
-                        user: 'ubuntu',
-                        password: 'ubuntu',
-                        allowAnyHosts: true
+        	   script {
+ 
+                      def remote = [
+		         name: 'k8s-master'
+                         host: '127.0.0.10',
+	       		 port: 22,
+                         user: 'ubuntu',
+                         password: 'ubuntu',
+                         allowAnyHosts: true
                     ]
 
 
@@ -68,9 +69,9 @@ stage("SSH Into k8s Server") {
 
                sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu'
 
-      }
-  } 
-}
+      }   
+    } 
+   }  
 
     stage("Deploy to Kubernetes (k8s-master)") {
     steps {
