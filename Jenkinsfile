@@ -1,4 +1,10 @@
-        remote.allowAnyHosts = true
+
+def remote = [:]
+remote.name = 'k8s-master'
+remote.host = '10.0.2.10'
+remote.user = 'ubuntu'
+remote.password = 'ubuntu'
+remote.allowAnyHosts = true
 
 pipeline {
     agent any
