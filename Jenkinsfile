@@ -58,12 +58,12 @@ pipeline {
 
 stage("SSH Into k8s Server") {
 	
-        stage('Put myapp-deployment.yml') {
+        steps('Put myapp-deployment.yml') {
             sshPut remote: remote, from: 'deploy-nginx.yml', into: '.'
               }
     
 
-     stage('Put myapp-deployment.yml') {
+     steps('Put myapp-deployment.yml') {
             sshPut remote: remote, from: 'service-nginx.yml', into: '.'
               }
 
