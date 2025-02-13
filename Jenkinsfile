@@ -82,8 +82,8 @@ pipeline {
 	        
                 bat """
 		echo ${KUBECONFIG} +'sssssiddda'
-                kubectl --kubeconfig=%KUBECONFIG% apply -f deploy-nginx.yaml
-                kubectl --kubeconfig=%KUBECONFIG% apply -f service-nginx.yaml
+                kubectl --kubeconfig=${KUBECONFIG} apply -f deploy-nginx.yaml
+                kubectl --kubeconfig=${KUBECONFIG} apply -f service-nginx.yaml
 
                 // 배포 확인
                 kubectl --kubeconfig=%KUBECONFIG% get pods -o wide
