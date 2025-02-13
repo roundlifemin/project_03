@@ -1,3 +1,5 @@
+        remote.allowAnyHosts = true
+
 pipeline {
     agent any
 
@@ -49,12 +51,6 @@ pipeline {
 
 
 stage("SSH Into k8s Server") {
-        def remote = []
-        remote.name = 'k8s-master'
-        remote.host = '10.0.2.10'
-        remote.user = 'ubuntu'
-        remote.password = 'ubuntu'
-        remote.allowAnyHosts = true
 	
         stage('Put myapp-deployment.yml') {
             sshPut remote: remote, from: 'deploy-nginx.yml', into: '.'
