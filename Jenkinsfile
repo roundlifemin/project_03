@@ -103,6 +103,9 @@ stage("Deploy to Kubernetes (k8s-master)") {
 //            ]
 
             sshCommand remote: remote, command: """
+	        kubectl delete -f /home/ubuntu/deply-nginx.yaml
+		kubectl delete -f /home/ubuntu/service-nginx.yaml
+
                 kubectl apply -f /home/ubuntu/deploy-nginx.yaml
                 kubectl apply -f /home/ubuntu/service-nginx.yaml
 
