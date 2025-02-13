@@ -44,12 +44,37 @@ pipeline {
         }
 
 
+
+
+
+
+stage("SSH Into k8s Server") {
+        def remote = [:]
+        remote.name = 'k8s-master'
+        remote.host = '10.0.2.10'
+        remote.user = 'ubuntu'
+        remote.password = 'ubuntu'
+        remote.allowAnyHosts = true
+
+        stage('Put myapp-deployment.yml') {
+            sshPut remote: remote, from: 'deploy-nginx.yml', into: '.'
+              }
+    
+
+     stage('Put myapp-deployment.yml') {
+            sshPut remote: remote, from: 'service-nginx.yml', into: '.'
+              }
+
+}
+
+
     stage("Deploy to Kubernetes (k8s-master)") {
     steps {
         script {
             // Kubernetes 클러스터에 접속하기 위한 kubeconfig 파일 사용
             withCredentials([file(credentialsId: 'kubeconfig_id', variable: 'KUBECONFIG')]) {
                 bat """
+		i
                 kubectl --kubeconfig=%KUBECONFIG% apply -f deploy-nginx.yaml
                 kubectl --kubeconfig=%KUBECONFIG% apply -f service-nginx.yaml
 
