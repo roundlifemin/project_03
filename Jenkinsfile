@@ -74,7 +74,7 @@ stage("SSH Into k8s Server") {
             // Kubernetes 클러스터에 접속하기 위한 kubeconfig 파일 사용
             withCredentials([file(credentialsId: 'kubeconfig_id', variable: 'KUBECONFIG')]) {
                 bat """
-		i
+		
                 kubectl --kubeconfig=%KUBECONFIG% apply -f deploy-nginx.yaml
                 kubectl --kubeconfig=%KUBECONFIG% apply -f service-nginx.yaml
 
