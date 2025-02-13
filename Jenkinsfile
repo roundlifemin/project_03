@@ -1,11 +1,4 @@
 	     
-def remote = [
-                        host: '10.0.2.10',                       
-                        user: 'ubuntu',
-                        password: 'ubuntu',
-                        allowAnyHosts: true
-                    ]
-
 pipeline {
     agent any
 
@@ -62,13 +55,18 @@ stage("SSH Into k8s Server") {
 
 	   script {
 
-             try {
+                def remote = [
+                        host: '10.0.2.10',
+                        user: 'ubuntu',
+                        password: 'ubuntu',
+                        allowAnyHosts: true
+                    ]
+
+
 	       sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: '/home/ubuntu'          
 
                sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu'
 
-             } catch(Exception e) {
-                error "Failed to upload : ${e.getMessage()}"
             }
 	  }
 
