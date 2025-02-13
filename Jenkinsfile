@@ -1,7 +1,6 @@
 pipeline {
     agent any
 
-
    // environment{
            //def dockerUsername = 'your_dockerhub_username' // Docker Hub 사용자 이름
            //def dockerToken = 'your_access_token' // 생성한 액세스 토큰
@@ -9,7 +8,6 @@ pipeline {
 	   //dockerUsername = 'roundlifemin'
 	   //dockerToken = 'dockerhub_access_key'
    //}
-
 
     stages {
         stage('Checkout') {
@@ -19,20 +17,13 @@ pipeline {
             }
        }
 
-
-
            stage('Build') {
             steps {
                 script {
                     // Docker 이미지 빌드
-		     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .
-
-
-                    
-                   bat  'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'
-		       
-                    
-             }
+		     //   docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .                    
+                   bat  'docker build  -f ./Dockerfile -t roundlifemin/project_03:latest .'		                          
+              }
             }
         }
 
@@ -46,18 +37,14 @@ pipeline {
 		      withCredentials([usernamePassword(credentialsId: 'dockerhub_access_key', usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_TOKEN')]) {
                         bat "echo ${DOCKER_TOKEN} | docker login -u ${DOCKER_USERNAME} --password-stdin"
                     }
-
 		        // Docker 이미지 푸시
-                       bat 'docker push roundlifemin/project_03:latest'
-                  
+                       bat 'docker push roundlifemin/project_03:latest'                 
                 }
             }
         }
 
 
-
-
-        stage("Deploy to Kubernetes (k8s-master)") {
+    stage("Deploy to Kubernetes (k8s-master)") {
     steps {
         script {
             // Kubernetes 클러스터에 접속하기 위한 kubeconfig 파일 사용
@@ -75,17 +62,12 @@ pipeline {
     }
 } 
 
-
-
        stage('Finish') {
             steps{
                 bat 'echo Build and deploy complete.'
                 bat 'docker images -qf dangling=true | xargs -I{} docker rmi {}'
             }
         }
-
-
-
     }
 }
 
