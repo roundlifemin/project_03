@@ -1,3 +1,11 @@
+ def remote = [
+                name: 'k8s-master',
+                host: '127.0.0.10',
+                port: 22,
+                user: 'ubuntu',
+                password: 'ubuntu',
+                allowAnyHosts: true
+            ]
 	     
 pipeline {
     agent any
@@ -9,6 +17,18 @@ pipeline {
 	   //dockerUsername = 'roundlifemin'
 	   //dockerToken = 'dockerhub_access_key'
    //}
+
+
+
+ def remote = [
+                name: 'k8s-master',
+                host: '127.0.0.10',
+                port: 22,
+                user: 'ubuntu',
+                password: 'ubuntu',
+                allowAnyHosts: true
+            ]
+
 
     stages {
         stage('Checkout') {
@@ -55,14 +75,14 @@ pipeline {
 
         	   script {
  
-                      def remote = [
-		         name: 'k8s-master',
-                         host: '127.0.0.10',
-	       		 port: 22,
-                         user: 'ubuntu',
-                         password: 'ubuntu',
-                         allowAnyHosts: true
-                    ]
+  //                    def remote = [
+//		         name: 'k8s-master',
+//                         host: '127.0.0.10',
+//	       		 port: 22,
+ //                        user: 'ubuntu',
+ //                        password: 'ubuntu',
+  //                       allowAnyHosts: true
+  //                  ]
 
 
 	       sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: '/home/ubuntu'          
@@ -80,13 +100,13 @@ stage("Deploy to Kubernetes (k8s-master)") {
     steps {
         script {
             def remote = [
-                name: 'k8s-master',
-                host: '127.0.0.10',
-                port: 22,
-                user: 'ubuntu',
-                password: 'ubuntu',
-                allowAnyHosts: true
-            ]
+//                name: 'k8s-master',
+//                host: '127.0.0.10',
+//                port: 22,
+ //               user: 'ubuntu',
+//                password: 'ubuntu',
+//                allowAnyHosts: true
+//            ]
 
             sshCommand remote: remote, command: """
                 kubectl apply -f /home/ubuntu/deploy-nginx.yaml
@@ -101,12 +121,28 @@ stage("Deploy to Kubernetes (k8s-master)") {
 }
 
 
+// stage("Deploy to Kubernetes (k8s-master)") {
+//  steps {
+ //       script {
+ //           // Kubernetes 클러스터에 접속하기 위한 kubeconfig 파일 사용
+ //           withCredentials([file(credentialsId: 'kubeconfig_id', variable: 'KUBECONFIG')]) {
 
+//                bat """                
+//                kubectl --kubeconfig=${KUBECONFIG} apply -f deploy-nginx.yaml
+//                kubectl --kubeconfig=${KUBECONFIG} apply -f service-nginx.yaml
+
+                // 배포 확인
+//                kubectl --kubeconfig=%KUBECONFIG% get pods -o wide
+//                kubectl --kubeconfig=%KUBECONFIG% get services
+//                """
+//            }
+//        }
+//    }
+//}
 
        stage('Finish') {
             steps{
                 bat 'echo Build and deploy complete.'
-                bat 'docker images -qf dangling=true | xargs -I{} docker rmi {}'
             }
         }
     }
