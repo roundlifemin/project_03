@@ -81,7 +81,7 @@ pipeline {
 
 	        
                 bat """
-		echo ${KUBECONFIG} +'sssssia'
+		echo ${KUBECONFIG} +'sssssiddda'
                 kubectl --kubeconfig=%KUBECONFIG% apply -f deploy-nginx.yaml
                 kubectl --kubeconfig=%KUBECONFIG% apply -f service-nginx.yaml
 
