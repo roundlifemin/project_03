@@ -57,7 +57,7 @@ stage("SSH Into k8s Server") {
 
                 def remote = [
                         host: '127.0.0.10',
-			port: 22
+			port: 22,
                         user: 'ubuntu',
                         password: 'ubuntu',
                         allowAnyHosts: true
