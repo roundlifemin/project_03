@@ -99,7 +99,7 @@ pipeline {
 stage("Deploy to Kubernetes (k8s-master)") {
     steps {
         script {
-            def remote = [
+//            def remote = [
 //                name: 'k8s-master',
 //                host: '127.0.0.10',
 //                port: 22,
