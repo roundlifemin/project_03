@@ -67,8 +67,6 @@ stage("SSH Into k8s Server") {
 
                sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu'
 
-            }
-	  }
       }
   } 
 }
