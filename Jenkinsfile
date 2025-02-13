@@ -70,6 +70,7 @@ stage("SSH Into k8s Server") {
              if (serviceStatus != 0) {
                 error "Failed to upload service-nginx.yaml"
             }
+	  }
 
   } 
 }
