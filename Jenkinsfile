@@ -60,7 +60,7 @@ stage("SSH Into k8s Server") {
 
 	   def remote = [
                         host: '127.0.0.2',
-                        port: 22,   VirtualBox에서 포트 포워딩 설정한 경우
+                        port: 22,   // VirtualBox에서 포트 포워딩 설정한 경우
                         user: 'ubuntu',
                         password: 'ubuntu',
                         allowAnyHosts: true
