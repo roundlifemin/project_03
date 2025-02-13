@@ -1,11 +1,3 @@
- def remote = [
-                name: 'k8s-master',
-                host: '127.0.0.10',
-                port: 22,
-                user: 'ubuntu',
-                password: 'ubuntu',
-                allowAnyHosts: true
-            ]
 	     
 pipeline {
     agent any
