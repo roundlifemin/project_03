@@ -1,10 +1,4 @@
 
-def remote = [:]
-remote.name = 'k8s-master'
-remote.host = '10.0.2.10'
-remote.user = 'ubuntu'
-remote.password = 'ubuntu'
-remote.allowAnyHosts = true
 
 pipeline {
     agent any
@@ -59,11 +53,23 @@ pipeline {
 stage("SSH Into k8s Server") {
 	
         steps('Put myapp-deployment.yml') {
-	   script {
-             try {
-	       sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: 'ubuntu@10.0.2.10:/home/ubuntu'          
 
-               sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: 'ubuntu@10.0.2.10:/home/ubuntu'
+
+	
+	   script {
+
+	   def remote = [
+                        host: '127.0.0.2',
+                        port: 22,   VirtualBox에서 포트 포워딩 설정한 경우
+                        user: 'ubuntu',
+                        password: 'ubuntu',
+                        allowAnyHosts: true
+                    ]
+	     
+             try {
+	       sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: '/home/ubuntu'          
+
+               sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu'
 
              } catch(Exception e) {
                 error "Failed to upload : ${e.getMessage()}"
