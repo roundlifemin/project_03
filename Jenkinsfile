@@ -59,9 +59,9 @@ pipeline {
 stage("SSH Into k8s Server") {
 	
         steps('Put myapp-deployment.yml') {
-            sshPut remote: remote, from: 'deploy-nginx.yaml', into: '~/.'
+            sshPut remote: remote, from: 'deploy-nginx.yaml', into: '/home/ubuntu'
 
-            sshPut remote: remote, from: 'service-nginx.yaml', into: '~/.'
+            sshPut remote: remote, from: 'service-nginx.yaml', into: '/home/ubuntu'
 
   } 
 }
