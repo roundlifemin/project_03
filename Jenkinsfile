@@ -60,15 +60,13 @@ stage("SSH Into k8s Server") {
 	
         steps('Put myapp-deployment.yml') {
 	   script {
-             def deployStatus =  sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: '/home/ubuntu', returnStatus: true
-             if (deployStatus != 0) {
-                error "Failed to upload deploy-nginx.yaml"
-            }
+             try {
+	       sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/deploy-nginx.yaml', into: '/home/ubuntu'          
 
-            def  serviceStatus = sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu', returnStatus: true
+               sshPut remote: remote, from: 'C:/ProgramData/Jenkins/.jenkins/workspace/project_03/service-nginx.yaml', into: '/home/ubuntu'
 
-             if (serviceStatus != 0) {
-                error "Failed to upload service-nginx.yaml"
+             } catch(Exception e) {
+                error "Failed to upload : ${e.getMessage()}"
             }
 	  }
 
