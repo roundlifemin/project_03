@@ -73,26 +73,35 @@ pipeline {
     } 
    }  
 
-    stage("Deploy to Kubernetes (k8s-master)") {
+
+
+
+stage("Deploy to Kubernetes (k8s-master)") {
     steps {
         script {
-            // Kubernetes 클러스터에 접속하기 위한 kubeconfig 파일 사용
-            withCredentials([file(credentialsId: 'kubeconfig_id', variable: 'KUBECONFIG')]) {
+            def remote = [
+                name: 'k8s-master',
+                host: '127.0.0.10',
+                port: 22,
+                user: 'ubuntu',
+                password: 'ubuntu',
+                allowAnyHosts: true
+            ]
 
-	        
-                bat """
-		echo ${KUBECONFIG} +'sssssiddda'
-                kubectl --kubeconfig=${KUBECONFIG} apply -f deploy-nginx.yaml
-                kubectl --kubeconfig=${KUBECONFIG} apply -f service-nginx.yaml
+            sshCommand remote: remote, command: """
+                kubectl apply -f /home/ubuntu/deploy-nginx.yaml
+                kubectl apply -f /home/ubuntu/service-nginx.yaml
 
-                // 배포 확인
-                kubectl --kubeconfig=%KUBECONFIG% get pods -o wide
-                kubectl --kubeconfig=%KUBECONFIG% get services
-                """
-            }
+                # 배포 확인
+                kubectl get pods -o wide
+                kubectl get services
+            """
         }
     }
-} 
+}
+
+
+
 
        stage('Finish') {
             steps{
