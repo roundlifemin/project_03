@@ -69,7 +69,7 @@ stage("SSH Into k8s Server") {
 
             }
 	  }
-
+      }
   } 
 }
 
